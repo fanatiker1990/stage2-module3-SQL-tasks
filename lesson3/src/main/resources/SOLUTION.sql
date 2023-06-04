@@ -1,20 +1,15 @@
--- Change table 'Student'
+UPDATE Student SET birthday = DATE_ADD('1900-01-01', INTERVAL FLOOR(RAND() * 100) YEAR) WHERE birthday IS NULL;
 ALTER TABLE Student MODIFY birthday DATE NOT NULL;
 
--- Change table 'Mark'
-ALTER TABLE Mark
-    MODIFY mark INT NOT NULL CHECK (mark >= 1 AND mark <= 10),
-    MODIFY student_id BIGINT NOT NULL,
-    MODIFY subject_id BIGINT NOT NULL;
+ALTER TABLE Mark MODIFY mark INT NOT NULL CHECK (mark >= 1 AND mark <= 10);
+ALTER TABLE Mark MODIFY student_id BIGINT NOT NULL;
+ALTER TABLE Mark MODIFY subject_id BIGINT NOT NULL;
 
--- Change table 'Subject'
-ALTER TABLE Subject MODIFY grade INT NOT NULL CHECK (grade >= 1 AND grade <= 5);
+alter table subject modify grade int not null check(grade>=1 and grade<=5);
 
--- Change table 'PaymentType'
-ALTER TABLE PaymentType ADD CONSTRAINT unique_name UNIQUE (name);
+alter table paymenttype add unique(name);
 
--- Change table 'Payment'
-ALTER TABLE Payment
-    MODIFY type_id BIGINT NOT NULL,
-    MODIFY amount DECIMAL(10, 2) NOT NULL,
-    MODIFY payment_date DATETIME NOT NULL;
+update payment set payment_date=date_add('1900-01-01', INTERVAL FLOOR(RAND() * 100) YEAR) where payment_date is null;
+alter table payment modify type_id  bigint not null;
+alter table payment modify amount decimal not null;
+alter table payment modify payment_date datetime not null;

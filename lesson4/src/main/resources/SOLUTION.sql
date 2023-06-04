@@ -1,9 +1,7 @@
+select * from STUDENT;
 
-select*from student;
+select top 50 * from STUDENT;
 
-select*from student
-limit 50;
+select NAME from STUDENT;
 
-select name from student;
-
-select distinct amount from payment;
+select distinct AMOUNT from PAYMENT;

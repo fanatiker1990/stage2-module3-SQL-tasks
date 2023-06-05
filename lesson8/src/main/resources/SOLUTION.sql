@@ -1,9 +1,23 @@
+SELECT MAX(birthday) AS max_date_of_birth
+FROM student;
 SELECT *
 FROM payment
-WHERE payment_date = (
-    SELECT MIN(CAST(payment_date AS DATE))
+WHERE DATE(payment_date) = (
+    SELECT MIN(DATE(payment_date))
     FROM payment
 );
-SELECT * FROM payment WHERE payment_date = (SELECT MIN(payment_date) FROM payment);
-SELECT * FROM mark WHERE mark = (SELECT AVG(mark) FROM mark WHERE subject_id = (SELECT id FROM subject WHERE name LIKE 'Math%'));
-SELECT * FROM payment WHERE amount = (SELECT MIN(amount) FROM payment WHERE type_id IN (SELECT id FROM paymenttype WHERE name = 'WEEKLY'));
+SELECT AVG(mark) AS average_mark
+FROM mark
+WHERE subject_id = (
+    SELECT id
+    FROM subject
+    WHERE name LIKE 'Math%'
+)
+HAVING COUNT(*) > 0;
+SELECT MIN(amount) AS min_payment_amount
+FROM payment
+WHERE type_id = (
+    SELECT id
+    FROM paymenttype
+    WHERE name = 'WEEKLY'
+);
